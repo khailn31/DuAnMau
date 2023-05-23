@@ -1,5 +1,6 @@
 package khailnph29864.fpoly.duanmau.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -24,7 +25,7 @@ public class PhieuMuonDAO {
         ContentValues values = new ContentValues();
         values.put("id_tv",ob.getId_tv());
         values.put("id_sach",ob.getId_sach());
-        values.put("id_tt",ob.getId_tt());
+//        values.put("id_tt",ob.getId_tt());
         values.put("date",ob.getDate());
         values.put("price",ob.getPrice());
         values.put("status",ob.getStatus());
@@ -35,7 +36,7 @@ public class PhieuMuonDAO {
         ContentValues values = new ContentValues();
         values.put("id_tv",ob.getId_tv());
         values.put("id_sach",ob.getId_sach());
-        values.put("id_tt",ob.getId_tt());
+//        values.put("id_tt",ob.getId_tt());
         values.put("date",ob.getDate());
         values.put("price",ob.getPrice());
         values.put("status",ob.getStatus());
@@ -46,6 +47,7 @@ public class PhieuMuonDAO {
         return sqLiteDatabase.delete("tbl_pm", "id_pm=?", new String[]{String.valueOf(ID)});
     }
 
+    @SuppressLint("Range")
     public ArrayList<PhieuMuon> getData(String sql, String... SelectAvgs) {
         ArrayList<PhieuMuon> lst = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.rawQuery(sql, SelectAvgs);
@@ -54,7 +56,7 @@ public class PhieuMuonDAO {
             ob.setId_pm(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_pm"))));
             ob.setId_tv(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_tv"))));
             ob.setId_sach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_sach"))));
-            ob.setId_tt(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_tt"))));
+//            ob.setId_tt(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_tt"))));
             ob.setDate(cursor.getString(cursor.getColumnIndex("date")));
             ob.setStatus(Integer.parseInt(cursor.getString(cursor.getColumnIndex("status"))));
             lst.add(ob);

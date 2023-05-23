@@ -49,7 +49,7 @@ public class SachDAO {
             ob.setId_sach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_sach"))));
             ob.setPrice_sach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("price_sach"))));
             ob.setId_loaisach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_loaisach"))));
-            ob.setName_sach(cursor.getString(cursor.getColumnIndex("name_lsach")));
+            ob.setName_sach(cursor.getString(cursor.getColumnIndex("name_sach")));
             lst.add(ob);
         }
         return lst;
@@ -63,5 +63,19 @@ public class SachDAO {
     public Sach getByID(String id) {
         String sql = "SELECT * FROM tbl_sach  where id_sach=?";
         return getData(sql, id).get(0);
+    }
+    public ArrayList<String> getName(String sql,String...SelectAvgs){
+        ArrayList<String> lst=new ArrayList<>();
+        Cursor cursor=sqLiteDatabase.rawQuery(sql,SelectAvgs);
+        while (cursor.moveToNext()){
+            String name=cursor.getString(cursor.getColumnIndex("name_sach"));
+            lst.add(name);
+        }
+        return lst;
+
+    }
+    public ArrayList<String> name(){
+        String name="SELECT name_sach FROM tbl_sach";
+        return getName(name);
     }
 }

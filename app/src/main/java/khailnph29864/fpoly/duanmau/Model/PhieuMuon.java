@@ -6,7 +6,7 @@ public class PhieuMuon {
     private int id_pm;
     private int id_tv;
     private int id_sach;
-    private int id_tt;
+//    private int id_tt;
     private String date;
     private int price;
     private int status;
@@ -35,13 +35,13 @@ public class PhieuMuon {
         this.id_sach = id_sach;
     }
 
-    public int getId_tt() {
-        return id_tt;
-    }
-
-    public void setId_tt(int id_tt) {
-        this.id_tt = id_tt;
-    }
+//    public int getId_tt() {
+//        return id_tt;
+//    }
+//
+//    public void setId_tt(int id_tt) {
+//        this.id_tt = id_tt;
+//    }
 
     public String getDate() {
         return date;

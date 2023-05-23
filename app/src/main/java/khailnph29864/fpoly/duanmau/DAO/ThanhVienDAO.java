@@ -59,4 +59,18 @@ public class ThanhVienDAO {
         String sql = "SELECT * FROM tbl_tv  where id_tv=?";
         return getData(sql, id).get(0);
     }
+    public ArrayList<String> getName(String sql,String...SelectAvgs){
+        ArrayList<String> lst=new ArrayList<>();
+        Cursor cursor=sqLiteDatabase.rawQuery(sql,SelectAvgs);
+        while (cursor.moveToNext()){
+            String name=cursor.getString(cursor.getColumnIndex("name_tv"));
+            lst.add(name);
+        }
+        return lst;
+
+    }
+    public ArrayList<String> name(){
+        String name="SELECT name_tv FROM tbl_tv";
+        return getName(name);
+    }
 }

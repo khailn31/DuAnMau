@@ -58,4 +58,18 @@ public class LoaiSachDAO {
         String sql = "SELECT * FROM tbl_loaisach  where id_loaisach=?";
         return getData(sql, id).get(0);
     }
+    public ArrayList<String> getName(String sql,String...SelectAvgs){
+        ArrayList<String> lst=new ArrayList<>();
+        Cursor cursor=sqLiteDatabase.rawQuery(sql,SelectAvgs);
+        while (cursor.moveToNext()){
+            String name=cursor.getString(cursor.getColumnIndex("name_loaisach"));
+            lst.add(name);
+        }
+        return lst;
+
+    }
+    public ArrayList<String> name(){
+        String name="SELECT name_loaisach FROM tbl_loaisach";
+        return getName(name);
+    }
 }

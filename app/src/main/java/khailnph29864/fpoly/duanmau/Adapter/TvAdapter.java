@@ -46,7 +46,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.DbVH> {
     @Override
     public void onBindViewHolder(@NonNull DbVH holder, int position) {
        ThanhVien thanhVien=list.get(position);
-        holder.tv1.setText(String.valueOf(thanhVien.getId_tv()));
+        holder.tv1.setText(String.valueOf(position+1));
         holder.tv2.setText(thanhVien.getName_tv());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
