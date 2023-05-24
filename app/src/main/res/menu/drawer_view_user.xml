@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/phieuMuon" android:title="Quản lý phiếu mượn" android:icon="@drawable/ic_baseline_home_24"/>
+        <item android:id="@+id/loaiSach" android:title="Quản lý loại sách" android:icon="@drawable/ic_baseline_menu_book_24"/>
+        <item android:id="@+id/sach" android:title="Quản lý sách" android:icon="@drawable/ic_baseline_bookmark_24"/>
+
+    </group>
+
+    <item android:title="Người dùng">
+        <menu>
+            <item  android:id="@+id/ttk" android:title="Tạo tài khoản" android:icon="@drawable/ic_baseline_group_add_24"/>
+            <item   android:id="@+id/dmk" android:title="Đổi mật khẩu" android:icon="@drawable/ic_baseline_key_24"/>
+            <item android:title="Đăng xuất" android:icon="@drawable/ic_baseline_exit_to_app_24" android:id="@+id/exit"/>
+        </menu>
+    </item>
+</menu>

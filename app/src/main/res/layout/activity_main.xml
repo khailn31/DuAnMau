@@ -35,7 +35,7 @@
         android:id="@+id/nav"
         app:headerLayout="@layout/nav_header"
         android:layout_gravity="start"
-        app:menu="@menu/drawer_view"/>
+        app:menu="@menu/drawer_view_admin"/>
  
 
 </androidx.drawerlayout.widget.DrawerLayout>

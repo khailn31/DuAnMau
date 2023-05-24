@@ -51,11 +51,11 @@ public class QuanLyPhieuMuonFragment extends Fragment {
     PMAdapter adapter;
     SachDAO sachDAO;
     ArrayList<Sach> list_sach;
-//    SachAdapter adapter_sach;
+    //    SachAdapter adapter_sach;
     ThanhVienDAO thanhVienDAO;
     ArrayList<ThanhVien> list_tv;
-//    TvAdapter adapter_tv;
-private final Calendar myCalendar = Calendar.getInstance();
+    //    TvAdapter adapter_tv;
+    private final Calendar myCalendar = Calendar.getInstance();
     FloatingActionButton btn;
 
 
@@ -86,47 +86,47 @@ private final Calendar myCalendar = Calendar.getInstance();
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recy=view.findViewById(R.id.recy_qlpm);
-        btn=view.findViewById(R.id.flAdd_pm);
-        dao=new PhieuMuonDAO(getContext());
-        list=dao.getAllData();
-        sachDAO=new SachDAO(getContext());
-        list_sach=sachDAO.getAllData();
-        thanhVienDAO=new ThanhVienDAO(getContext());
-        list_tv=thanhVienDAO.getAllData();
+        recy = view.findViewById(R.id.recy_qlpm);
+        btn = view.findViewById(R.id.flAdd_pm);
+        dao = new PhieuMuonDAO(getContext());
+        list = dao.getAllData();
+        sachDAO = new SachDAO(getContext());
+        list_sach = sachDAO.getAllData();
+        thanhVienDAO = new ThanhVienDAO(getContext());
+        list_tv = thanhVienDAO.getAllData();
 
-        adapter=new PMAdapter(list,getContext());
-        RecyclerView rc=view.findViewById(R.id.recy_qlpm);
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        adapter = new PMAdapter(list, getContext());
+        RecyclerView rc = view.findViewById(R.id.recy_qlpm);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc.setLayoutManager(linearLayoutManager);
         recy.setAdapter(adapter);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog dialog=new Dialog(getContext());
+                Dialog dialog = new Dialog(getContext());
                 dialog.setContentView(R.layout.layout_dialog_add_pm);
 
-                TextView tv1,tv2;
-                Spinner sp1,sp2;
-                CheckBox ckb ;
-                Button btn1,btn2,btn3;
-                sp1=dialog.findViewById(R.id.sp_add_tv_pm);
-                tv2=dialog.findViewById(R.id.tv_add_s_price_pm);
-                sp2=dialog.findViewById(R.id.sp_add_s_pm);
-                btn1=dialog.findViewById(R.id.btnSave_add_pm);
-                btn2=dialog.findViewById(R.id.btnCacel_add_pm);
-                tv1=dialog.findViewById(R.id.tv_add_date_pm);
-                btn3=dialog.findViewById(R.id.btn_date_picker);
-                ckb=dialog.findViewById(R.id.ckb_status);
-                PhieuMuon phieuMuon=new PhieuMuon();
+                TextView tv1, tv2;
+                Spinner sp1, sp2;
+                CheckBox ckb;
+                Button btn1, btn2, btn3;
+                sp1 = dialog.findViewById(R.id.sp_add_tv_pm);
+                tv2 = dialog.findViewById(R.id.tv_add_s_price_pm);
+                sp2 = dialog.findViewById(R.id.sp_add_s_pm);
+                btn1 = dialog.findViewById(R.id.btnSave_add_pm);
+                btn2 = dialog.findViewById(R.id.btnCacel_add_pm);
+                tv1 = dialog.findViewById(R.id.tv_add_date_pm);
+                btn3 = dialog.findViewById(R.id.btn_date_picker);
+                ckb = dialog.findViewById(R.id.ckb_status);
+                PhieuMuon phieuMuon = new PhieuMuon();
                 ArrayAdapter<String> adapter_s = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, sachDAO.name());
                 sp2.setAdapter(adapter_s);
 
                 sp2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        list_sach=sachDAO.getAllData();
+                        list_sach = sachDAO.getAllData();
                         phieuMuon.setId_sach(list_sach.get(position).getId_sach());
                         phieuMuon.setPrice(list_sach.get(position).getPrice_sach());
                         tv2.setText(String.valueOf(list_sach.get(position).getPrice_sach()));
@@ -144,7 +144,7 @@ private final Calendar myCalendar = Calendar.getInstance();
                 sp1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        list_tv=thanhVienDAO.getAllData();
+                        list_tv = thanhVienDAO.getAllData();
                         phieuMuon.setId_tv(list_tv.get(position).getId_tv());
                     }
 
@@ -174,17 +174,17 @@ private final Calendar myCalendar = Calendar.getInstance();
                 btn1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(ckb.isChecked()){
+                        if (ckb.isChecked()) {
                             phieuMuon.setStatus(1);
-                        }else{
+                        } else {
                             phieuMuon.setStatus(0);
                         }
-                        if(dao.insert(phieuMuon)>0){
-                            Toast.makeText(getContext(), "Thêm  thành công", Toast.LENGTH_SHORT).show();
-                            list=dao.getAllData();
+                        if (dao.insert(phieuMuon) > 0) {
+                            Toast.makeText(getContext(), getString(R.string.txt_themthanhcong), Toast.LENGTH_SHORT).show();
+                            list = dao.getAllData();
                             adapter.setData(list);
-                        }else{
-                            Toast.makeText(getContext(), "Them that bai", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), getString(R.string.txt_themthatbai), Toast.LENGTH_SHORT).show();
                         }
                         dialog.dismiss();
                     }
@@ -192,7 +192,7 @@ private final Calendar myCalendar = Calendar.getInstance();
                 btn2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       dialog.dismiss();
+                        dialog.dismiss();
 
 
                     }

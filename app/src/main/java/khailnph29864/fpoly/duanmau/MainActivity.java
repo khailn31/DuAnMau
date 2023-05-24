@@ -25,21 +25,29 @@ import khailnph29864.fpoly.duanmau.Fragment.TaoTKFragment;
 import khailnph29864.fpoly.duanmau.Fragment.Top10Fragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-private DrawerLayout drawerLayout;
-private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar=findViewById(R.id.toolbar);
-        navigationView=findViewById(R.id.nav);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        navigationView = findViewById(R.id.nav);
+
+//        boolean isAdmin = false;
+//        if (!isAdmin) {
+//            navigationView.getMenu().clear();
+//            navigationView.inflateMenu(R.menu.drawer_view_user);
+//        }
+
         navigationView.setNavigationItemSelectedListener(this);
 
         setSupportActionBar(toolbar);
-        drawerLayout=findViewById(R.id.drawerlayout);
-        ActionBarDrawerToggle drawerToggle=new ActionBarDrawerToggle(MainActivity.this,drawerLayout,toolbar,0,0);
+        drawerLayout = findViewById(R.id.drawerlayout);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, 0, 0);
         drawerToggle.syncState();
-        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.flContent, QuanLyPhieuMuonFragment.newInstance());
 
 
@@ -47,8 +55,8 @@ private NavigationView navigationView;
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id=item.getItemId();
-        switch (id){
+        int id = item.getItemId();
+        switch (id) {
             case R.id.phieuMuon:
                 replaceFrag(QuanLyPhieuMuonFragment.newInstance());
                 break;
@@ -79,17 +87,19 @@ private NavigationView navigationView;
         }
         return false;
     }
-public void replaceFrag(Fragment fragment){
-        FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.flContent,fragment);
+
+    public void replaceFrag(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.flContent, fragment);
         transaction.commit();
         drawerLayout.close();
-}
+    }
+
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isOpen()==true){
+        if (drawerLayout.isOpen() == true) {
             drawerLayout.close();
-        }else{
+        } else {
             super.onBackPressed();
         }
 
