@@ -12,9 +12,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.HeaderViewListAdapter;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import khailnph29864.fpoly.duanmau.DAO.ThuThuDAO;
 import khailnph29864.fpoly.duanmau.Fragment.DoanhThuFragment;
 import khailnph29864.fpoly.duanmau.Fragment.DoiMKFragment;
 import khailnph29864.fpoly.duanmau.Fragment.QuanLyLoaiSachFragment;
@@ -23,10 +27,12 @@ import khailnph29864.fpoly.duanmau.Fragment.QuanLySachFragment;
 import khailnph29864.fpoly.duanmau.Fragment.QuanLyThanhVienFragment;
 import khailnph29864.fpoly.duanmau.Fragment.TaoTKFragment;
 import khailnph29864.fpoly.duanmau.Fragment.Top10Fragment;
+import khailnph29864.fpoly.duanmau.Model.ThuThu;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    View header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +40,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.nav);
-
-//        boolean isAdmin = false;
-//        if (!isAdmin) {
-//            navigationView.getMenu().clear();
-//            navigationView.inflateMenu(R.menu.drawer_view_user);
-//        }
-
         navigationView.setNavigationItemSelectedListener(this);
-
+        header=navigationView.getHeaderView(0);
+        TextView tv1=header.findViewById(R.id.tv_user_main);
+        Intent i=getIntent();
+        String user=i.getStringExtra("user");
+        ThuThuDAO dao=new ThuThuDAO(this);
+        ThuThu thuThu=dao.getByID(user);
+        String name=thuThu.getName_tt();
+        tv1.setText(name);
+        if(user.equalsIgnoreCase("admin")){
+            navigationView.getMenu().findItem(R.id.ttk).setVisible(true);
+        }else{
+            navigationView.getMenu().findItem(R.id.ttk).setVisible(false);
+        }
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawerlayout);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, 0, 0);
         drawerToggle.syncState();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.flContent, QuanLyPhieuMuonFragment.newInstance());
-
+        transaction.commit();
 
     }
 
@@ -102,6 +113,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
-
     }
 }

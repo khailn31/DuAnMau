@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -59,7 +60,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.DbVH> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showInfor(sach);
+                showInfor(list.get(position));
             }
         });
         holder.btndel.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +73,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.DbVH> {
         holder.btnUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update(sach);
+                update(sach, position);
             }
         });
     }
@@ -153,7 +154,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.DbVH> {
         });
         dialogDL.show();
     }
-    private void update(Sach sach){
+    private void update(Sach sach,int id){
         Dialog dialog=new Dialog(context);
         dialog.setContentView(R.layout.layout_dialog_add_s);
         TextInputEditText ed1,ed2;
@@ -175,19 +176,33 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.DbVH> {
         TextView tv1;
         tv1=dialog.findViewById(R.id.title_dialog_s);
         tv1.setText("Cập nhật thông tin");
-        ed1=dialog.findViewById(R.id.ed_add_s_name);ed1.setText(sach.getName_sach());
-        ed2=dialog.findViewById(R.id.ed_add_s_price);ed2.setText(String.valueOf(sach.getPrice_sach()));
+        ed1=dialog.findViewById(R.id.ed_add_s_name);ed1.setText(list.get(id).getName_sach());
+        ed2=dialog.findViewById(R.id.ed_add_s_price);ed2.setText(String.valueOf(list.get(id).getPrice_sach()));
         btn1=dialog.findViewById(R.id.btnSave_add_s);
         btn2=dialog.findViewById(R.id.btnCacel_add_s);
+        sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int i= lsList.get(position).getId_loaisach();
+                sach.setId_loaisach(i);
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Sach sach1=new Sach();
-               sach1.setId_sach(sach.getId_sach());
-                sach1.setName_sach(ed1.getText().toString());
-                sach1.setPrice_sach(Integer.parseInt(ed2.getText().toString()));
-                sach1.setId_loaisach(sach.getId_loaisach());
-                if(dao.update(sach1)>0){
+                sach.setName_sach(ed1.getText().toString());
+                sach.setPrice_sach(Integer.parseInt(ed2.getText().toString()));
+
+
+                if(dao.update(sach)>0){
                     Toast.makeText(context, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                     list=dao.getAllData();
                     setData(list);

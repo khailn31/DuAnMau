@@ -2,8 +2,17 @@ package khailnph29864.fpoly.duanmau.Model;
 
 public class ThuThu {
     private int id_tt;
+    private String user_tt;
     private String name_tt;
     private String pass_tt;
+
+    public String getUser_tt() {
+        return user_tt;
+    }
+
+    public void setUser_tt(String user_tt) {
+        this.user_tt = user_tt;
+    }
 
     public int getId_tt() {
         return id_tt;

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.DoiMKFragment"
     android:orientation="vertical">
   <TextView
@@ -16,7 +17,8 @@
   <com.google.android.material.textfield.TextInputLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="30dp">
+      android:layout_marginTop="30dp"
+     >
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edPassOld"
         android:layout_width="match_parent"
@@ -30,7 +32,8 @@
   <com.google.android.material.textfield.TextInputLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="30dp">
+      android:layout_marginTop="30dp"
+      app:passwordToggleEnabled="true">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edPassChange"
         android:layout_width="match_parent"
@@ -43,7 +46,8 @@
   <com.google.android.material.textfield.TextInputLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="30dp">
+      android:layout_marginTop="30dp"
+      app:passwordToggleEnabled="true">
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edRePassChange"
         android:layout_width="match_parent"

@@ -22,6 +22,7 @@ public class ThuThuDAO {
 
     public long insert(ThuThu ob) {
         ContentValues values = new ContentValues();
+        values.put("user_tt",ob.getUser_tt());
         values.put("name_tt", ob.getName_tt());
         values.put("pass_tt", ob.getPass_tt());
         return sqLiteDatabase.insert("tbl_tt", null, values);
@@ -29,6 +30,7 @@ public class ThuThuDAO {
 
     public int update(ThuThu ob) {
         ContentValues values = new ContentValues();
+        values.put("user_tt",ob.getUser_tt());
         values.put("name_tt", ob.getName_tt());
         values.put("pass_tt", ob.getPass_tt());
         return sqLiteDatabase.update("tbl_tt", values, "id_tt=?", new String[]{String.valueOf(ob.getId_tt())});
@@ -44,6 +46,7 @@ public class ThuThuDAO {
         while (cursor.moveToNext()) {
             ThuThu ob = new ThuThu();
             ob.setId_tt(Integer.parseInt(cursor.getString(cursor.getColumnIndex("id_tt"))));
+            ob.setUser_tt(cursor.getString(cursor.getColumnIndex("user_tt")));
             ob.setName_tt(cursor.getString(cursor.getColumnIndex("name_tt")));
             ob.setPass_tt(cursor.getString(cursor.getColumnIndex("pass_tt")));
             lst.add(ob);
@@ -57,11 +60,11 @@ public class ThuThuDAO {
     }
 
     public ThuThu getByID(String id) {
-        String sql = "SELECT * FROM tbl_tt  where name_tt=?";
+        String sql = "SELECT * FROM tbl_tt  where user_tt=?";
         return getData(sql, id).get(0);
     }
     public int checkLogin(String id,String password){
-        String sql="SELECT * FROM tbl_tt WHERE name_tt=? AND pass_tt=?";
+        String sql="SELECT * FROM tbl_tt WHERE user_tt=? AND pass_tt=?";
         ArrayList<ThuThu> list=getData(sql,id,password);
         if(list.size()==0){
             return -1;

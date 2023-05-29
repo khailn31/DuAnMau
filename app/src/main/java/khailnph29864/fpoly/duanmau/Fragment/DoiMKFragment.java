@@ -1,6 +1,7 @@
 package khailnph29864.fpoly.duanmau.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 
 import khailnph29864.fpoly.duanmau.DAO.ThuThuDAO;
+import khailnph29864.fpoly.duanmau.MainActivity;
 import khailnph29864.fpoly.duanmau.Model.ThuThu;
 import khailnph29864.fpoly.duanmau.R;
 
@@ -80,6 +82,8 @@ public class DoiMKFragment extends Fragment {
                         edPass.setText("");
                         edPassOld.setText("");
                         edRePass.setText("");
+                        Intent i=new Intent(getContext(), MainActivity.class);
+                        startActivity(i);
                     }else{
                         Toast.makeText(getContext(), "Thay doi mat khau that bai", Toast.LENGTH_SHORT).show();
                     }
@@ -105,7 +109,7 @@ public class DoiMKFragment extends Fragment {
            check=-1;
             }
             if(!passN.equals(repass)){
-                Toast.makeText(getContext(), "Mật khẩu mới không khớp", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
             check=-1;}
         }
         return check;

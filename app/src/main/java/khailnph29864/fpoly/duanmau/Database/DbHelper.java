@@ -16,17 +16,17 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String Table_thuthu= "CREATE TABLE " +
             "tbl_tt(" +
             "id_tt INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "user_tt TEXT NOT NULL,"+
             "name_tt TEXT NOT NULL," +
             "pass_tt TEXT NOT NULL)";
-    public static final String insert_tt="Insert into tbl_tt(name_tt,pass_tt) values" +
-            "('khai','123')";
+    public static final String insert_tt="Insert into tbl_tt(user_tt,name_tt,pass_tt) values" +
+            "('admin','le ngoc khai','123')";
     public static final String Table_thanhvien="CREATE TABLE " +
             "tbl_tv(" +
             "id_tv INTEGER PRIMARY KEY AUTOINCREMENT," +
             "name_tv TEXT NOT NULL," +
             "year_tv TEXT NOT NULL)";
-    public static final String insert_tv="Insert into tbl_tv(name_tv,year_tv) values" +
-            "('le ngoc khai','2001')";
+
 
     public static final String Table_loaisach="CREATE TABLE " +
             "tbl_loaisach(" +
@@ -60,7 +60,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(Table_phieumuon);
 
         db.execSQL(insert_tt);
-        db.execSQL(insert_tv);
+
+
     }
 
     @Override
