@@ -82,8 +82,8 @@ public class DoiMKFragment extends Fragment {
                         edPass.setText("");
                         edPassOld.setText("");
                         edRePass.setText("");
-                        Intent i=new Intent(getContext(), MainActivity.class);
-                        startActivity(i);
+//                        Intent i=new Intent(getContext(), MainActivity.class);
+//                        startActivity(i);
                     }else{
                         Toast.makeText(getContext(), "Thay doi mat khau that bai", Toast.LENGTH_SHORT).show();
                     }
@@ -98,6 +98,7 @@ public class DoiMKFragment extends Fragment {
         int check=1;
         if(edPassOld.getText().length()==0||edPass.getText().length()==0||edRePass.getText().length()==0){
             Toast.makeText(getContext(), "không được để trông", Toast.LENGTH_SHORT).show();
+            check=-1;
         }else{
             SharedPreferences pref=getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
             String passOld=pref.getString("PASSWORD","");

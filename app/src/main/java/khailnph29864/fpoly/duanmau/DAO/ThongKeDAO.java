@@ -15,34 +15,39 @@ import khailnph29864.fpoly.duanmau.Model.Top;
 public class ThongKeDAO {
     private final SQLiteDatabase sqLiteDatabase;
     private Context context;
+    SachDAO sachDAO;
 
     public ThongKeDAO(Context context) {
         DbHelper helper = new DbHelper(context);
         sqLiteDatabase = helper.getWritableDatabase();
+        sachDAO = new SachDAO(context);
     }
-    public ArrayList<Top> getTop(){
-        String sqlTop="SELECT id_sach, cout(id_sach) as soLuong FROM tbl_pm GROUP BY id_sach " +
+
+    public ArrayList<Top> getTop() {
+        String sqlTop = "SELECT id_sach, count(id_sach) as soLuong FROM tbl_pm GROUP BY id_sach " +
                 "ORDER BY soLuong DESC LIMIT 10";
-        ArrayList<Top> lst=new ArrayList<Top>();
-        SachDAO sachDAO=new SachDAO(context);
-        Cursor c=sqLiteDatabase.rawQuery(sqlTop,null);
-        while (c.moveToNext()){
-            Top top=new Top();
-            Sach sach=sachDAO.getByID(c.getString(c.getColumnIndex("id_sach")));
+        ArrayList<Top> lst = new ArrayList<Top>();
+
+        Cursor c = sqLiteDatabase.rawQuery(sqlTop, null);
+        while (c.moveToNext()) {
+            Top top = new Top();
+            Sach sach = sachDAO.getByID(c.getString(c.getColumnIndex("id_sach")));
             top.setTenSach(sach.getName_sach());
             top.setSoLuong(Integer.parseInt(c.getString(c.getColumnIndex("soLuong"))));
+
             lst.add(top);
         }
         return lst;
     }
-    public int getDoanhThu(String tuNgay,String denNgay){
-        String sql="SELECT SUM(tienThue) as doanhThu FROM tbl_pm WHERE ngay BETWEEN ? AND?";
-        ArrayList<Integer> list=new ArrayList<>();
-        Cursor c=sqLiteDatabase.rawQuery(sql,new String[]{tuNgay,denNgay});
-        while (c.moveToNext()){
-            try{
+
+    public int getDoanhThu(String tuNgay, String denNgay) {
+        String sql = "SELECT SUM(price) as doanhThu FROM tbl_pm WHERE date BETWEEN ? AND ? ";
+        ArrayList<Integer> list = new ArrayList<>();
+        Cursor c = sqLiteDatabase.rawQuery(sql, new String[]{tuNgay,denNgay});
+        while (c.moveToNext()) {
+            try {
                 list.add(Integer.parseInt(c.getString(c.getColumnIndex("doanhThu"))));
-            }catch (Exception e){
+            } catch (Exception e) {
                 list.add(0);
             }
         }

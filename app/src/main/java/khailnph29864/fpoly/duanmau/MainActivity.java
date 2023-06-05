@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ThuThu thuThu=dao.getByID(user);
         String name=thuThu.getName_tt();
         tv1.setText(name);
-        if(user.equalsIgnoreCase("admin")){
+        if(user.startsWith("admin")){
             navigationView.getMenu().findItem(R.id.ttk).setVisible(true);
         }else{
             navigationView.getMenu().findItem(R.id.ttk).setVisible(false);

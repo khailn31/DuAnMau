@@ -85,8 +85,6 @@ public class TaoTKFragment extends Fragment {
                         ed2.setText("");
                         ed3.setText("");
                         ed4.setText("");
-                        Intent i=new Intent(getContext(), MainActivity.class);
-                        startActivity(i);
                     }else {
                         Toast.makeText(getContext(), "them that bai", Toast.LENGTH_SHORT).show();
                     }

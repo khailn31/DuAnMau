@@ -73,16 +73,26 @@ public class LoginActivity extends AppCompatActivity {
     public void checkLogin() {
         strUser = edUsername.getText().toString();
         strPass = edPassword.getText().toString();
-        if (dao.checkLogin(strUser, strPass) > 0) {
-            Toast.makeText(this, "Login thanh cong", Toast.LENGTH_SHORT).show();
-            rememberUser(strUser, strPass, chkRememberPass.isChecked());
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            i.putExtra("user", strUser);
-            startActivity(i);
-            finish();
-        } else {
-            Toast.makeText(this, "Login k thanh cong", Toast.LENGTH_SHORT).show();
+        if (strUser.length() == 0) {
+            edUsername.requestFocus();
+            edUsername.setError("Vui lòng nhập tên đăng nhập");
+        } else if (strPass.length() == 0) {
+            edPassword.requestFocus();
+            edPassword.setError("Vui lòng nhập mật khẩu");
+        }else {
+            if (dao.checkLogin(strUser, strPass) > 0) {
+                Toast.makeText(this, "Login thanh cong", Toast.LENGTH_SHORT).show();
+                rememberUser(strUser, strPass, chkRememberPass.isChecked());
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.putExtra("user", strUser);
+                startActivity(i);
+                finish();
+            } else {
+                Toast.makeText(this, "Login k thanh cong", Toast.LENGTH_SHORT).show();
+            }
+
         }
+
 
     }
 
